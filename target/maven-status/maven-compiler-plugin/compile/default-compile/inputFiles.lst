@@ -11,6 +11,7 @@
 /Users/Martin/IdeaProjects/garage-restserver/src/main/java/com/github/martinfrank/garage/restserver/SubmitAction.java
 /Users/Martin/IdeaProjects/garage-restserver/src/main/java/com/github/martinfrank/garage/restserver/cli/RenderCommand.java
 /Users/Martin/IdeaProjects/garage-restserver/src/main/java/com/github/martinfrank/garage/restserver/GarageServer.java
+/Users/Martin/IdeaProjects/garage-restserver/src/main/java/com/github/martinfrank/garage/restserver/managed/DistanceObserver.java
 /Users/Martin/IdeaProjects/garage-restserver/src/main/java/com/github/martinfrank/garage/restserver/api/Saying.java
 /Users/Martin/IdeaProjects/garage-restserver/src/main/java/com/github/martinfrank/garage/restserver/core/Template.java
 /Users/Martin/IdeaProjects/garage-restserver/src/main/java/com/github/martinfrank/garage/restserver/HtmlSubmitButton.java

@@ -2,6 +2,7 @@ package com.github.martinfrank.garage.restserver;
 
 import com.github.martinfrank.garage.restserver.cli.RenderCommand;
 import com.github.martinfrank.garage.restserver.core.Template;
+import com.github.martinfrank.garage.restserver.managed.DistanceObserver;
 import com.github.martinfrank.garage.restserver.resources.HelloWorldResource;
 import io.dropwizard.Application;
 import io.dropwizard.assets.AssetsBundle;
@@ -39,7 +40,6 @@ public class GarageRestServer extends Application<GarageRestServerConfiguration>
         bootstrap.addCommand(new RenderCommand());
         bootstrap.addBundle(new AssetsBundle());
 
-
     }
 
     @Override
@@ -47,18 +47,16 @@ public class GarageRestServer extends Application<GarageRestServerConfiguration>
         final Template template = configuration.buildTemplate();
         environment.jersey().register(new HelloWorldResource(template));
 
+        environment.lifecycle().manage(new DistanceObserver(configuration));
+
 
         final FilterRegistration.Dynamic cors =
                 environment.servlets().addFilter("CORS", CrossOriginFilter.class);
 
         // Configure CORS parameters
         cors.setInitParameter("allowedOrigins", "*");
-//        cors.setInitParameter("allowedHeaders", "X-Requested-With,Content-Type,Accept,Origin");
-//        cors.setInitParameter("allowedMethods", "OPTIONS,GET,PUT,POST,DELETE,HEAD");
-
         cors.setInitParameter("allowedHeaders", "*");
         cors.setInitParameter("allowedMethods", "*,GET,PUT,POST,DELETE,HEAD");
-
 
         // Add URL mapping
         cors.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
