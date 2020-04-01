@@ -1,2 +1,2 @@
-# garage-restserver
-rest server for the garage
+# raspi-webserver
+webserver for my raspi
