@@ -16,6 +16,9 @@ public class GarageRestServerConfiguration extends Configuration {
     @NotEmpty
     private String defaultName = "Stranger";
 
+    @JsonProperty("pinConfig")
+    public PinConfig pinConfig;
+
     @NotNull
     private Map<String, Map<String, String>> viewRendererConfiguration = Collections.emptyMap();
 
@@ -51,5 +54,14 @@ public class GarageRestServerConfiguration extends Configuration {
     @JsonProperty("viewRendererConfiguration")
     public void setViewRendererConfiguration(Map<String, Map<String, String>> viewRendererConfiguration) {
         this.viewRendererConfiguration = viewRendererConfiguration;
+    }
+
+    public static final class PinConfig {
+
+        @JsonProperty("burstPin")
+        public String burstPin;
+
+        @JsonProperty("echoPin")
+        public String echoPin;
     }
 }

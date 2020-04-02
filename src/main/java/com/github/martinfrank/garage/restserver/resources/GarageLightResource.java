@@ -24,13 +24,13 @@ public class GarageLightResource {
 
     @GET
     public GarageLight getLight() {
-        LOGGER.info("getGate");
+        LOGGER.info("getLight");
         return new GarageLight("unknown", "16.12.1977", false);
     }
 
     @POST
-    public GarageLight openCloseGate() {
-        LOGGER.info("openCloseGate");
+    public GarageLight onOffLight() {
+        LOGGER.info("onOffLight");
         return new GarageLight("unknown", "16.12.1977", true);
     }
 

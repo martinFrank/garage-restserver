@@ -2,10 +2,11 @@ package com.github.martinfrank.garage.restserver;
 
 import com.github.martinfrank.garage.restserver.cli.RenderCommand;
 import com.github.martinfrank.garage.restserver.core.Template;
-import com.github.martinfrank.garage.restserver.managed.DistanceObserver;
 import com.github.martinfrank.garage.restserver.resources.GarageGateResource;
 import com.github.martinfrank.garage.restserver.resources.GarageLightResource;
 import com.github.martinfrank.garage.restserver.resources.HelloWorldResource;
+import com.github.martinfrank.garage.restserver.services.DistanceMeasureService;
+import com.github.martinfrank.garage.restserver.services.OpenGateAlertService;
 import io.dropwizard.Application;
 import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
@@ -48,12 +49,13 @@ public class GarageRestServer extends Application<GarageRestServerConfiguration>
 
     @Override
     public void run(GarageRestServerConfiguration configuration, Environment environment) {
-        final GarageModel model = new GarageModel();//shared model
+        final GarageModel model = new GarageModel(configuration);//shared model
         final Template template = configuration.buildTemplate();
         environment.jersey().register(new HelloWorldResource(template, model));
         environment.jersey().register(new GarageGateResource(model));
         environment.jersey().register(new GarageLightResource(model));
-        environment.lifecycle().manage(new DistanceObserver(configuration, model));
+        environment.lifecycle().manage(new DistanceMeasureService(model));
+        environment.lifecycle().manage(new OpenGateAlertService(model));
 
 
         final FilterRegistration.Dynamic cors =
@@ -67,4 +69,6 @@ public class GarageRestServer extends Application<GarageRestServerConfiguration>
         // Add URL mapping
         cors.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
     }
+
+
 }

@@ -30,6 +30,12 @@ public class GarageGateResource {
 
     @POST
     public GarageGate openCloseGate() {
+        try {
+            model.openCloseGate();
+            return new GarageGate(model.getGateStatus(), model.getGateLastUpdate(), model.isGateMoving());
+        } catch (Exception e) {
+
+        }
         LOGGER.info("openCloseGate");
         return new GarageGate("unknown", "16.12.1977", true);
     }

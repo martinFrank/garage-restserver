@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>com.github.martinfrank</groupId>
-    <artifactId>garage-restserver</artifactId>
-    <name>garage-restserver</name>
-    <version>0.0.1</version>
-    <description>this project provides a command line interface</description>
-    <url>https://github.com/martinFrank/commandLineInterface</url>
-    <developers>
-        <developer>
-            <name>Martin Frank</name>
-            <email>martin.frank.privat@gmail.com</email>
-            <organization>Martin Frank</organization>
-        </developer>
-    </developers>
-    <licenses>
-        <license>
-            <name>GNU GENERAL PUBLIC LICENSE</name>
-            <url>https://www.gnu.org/licenses/gpl-3.0.en.html</url>
-        </license>
-    </licenses>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.github.martinfrank</groupId>
+  <artifactId>garage-restserver</artifactId>
+  <name>garage-restserver</name>
+  <version>0.0.1</version>
+  <description>this project provides a command line interface</description>
+  <url>https://github.com/martinFrank/commandLineInterface</url>
+  <developers>
+    <developer>
+      <name>Martin Frank</name>
+      <email>martin.frank.privat@gmail.com</email>
+      <organization>Martin Frank</organization>
+    </developer>
+  </developers>
+  <licenses>
+    <license>
+      <name>GNU GENERAL PUBLIC LICENSE</name>
+      <url>https://www.gnu.org/licenses/gpl-3.0.en.html</url>
+    </license>
+  </licenses>
   <scm>
     <connection>scm:git:git://github.com/github.com/martinFrank/garage-restserver.git</connection>
     <developerConnection>scm:git:ssh://github.com/martinFrank/garage-restserver.git</developerConnection>
@@ -97,7 +97,7 @@
             </goals>
             <configuration>
               <transformers>
-                  <transformer/>
+                <transformer/>
                 <transformer>
                   <mainClass>com.github.martinfrank.garage.restserver.GarageRestServer</mainClass>
                 </transformer>

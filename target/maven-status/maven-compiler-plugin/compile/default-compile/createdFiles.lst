@@ -1,3 +1,4 @@
+com/github/martinfrank/garage/restserver/GarageRestServerConfiguration$PinConfig.class
 com/github/martinfrank/garage/restserver/api/GarageGate.class
 com/github/martinfrank/garage/restserver/ToggleAction.class
 com/github/martinfrank/garage/restserver/resources/GarageGateResource.class
