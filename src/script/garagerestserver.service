@@ -1,0 +1,14 @@
+[Unit]
+Description=garage rest service
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/java -jar garage-restserver-0.0.1.jar server garage.yml
+WorkingDirectory=/home/pi/garageserver/rest
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=pi
+
+[Install]
+WantedBy=multi-user.target

@@ -1,5 +1,6 @@
 package com.github.martinfrank.garage.restserver.managed;
 
+import com.github.martinfrank.garage.restserver.GarageModel;
 import com.github.martinfrank.garage.restserver.GarageRestServerConfiguration;
 import io.dropwizard.lifecycle.Managed;
 import org.slf4j.Logger;
@@ -13,8 +14,7 @@ public class DistanceObserver implements Managed {
     private static final Logger LOGGER = LoggerFactory.getLogger(DistanceObserver.class);
     private final Timer timer = new Timer();
 
-    public DistanceObserver(GarageRestServerConfiguration configuration) {
-
+    public DistanceObserver(GarageRestServerConfiguration configuration, GarageModel model) {
     }
 
     @Override
@@ -32,7 +32,7 @@ public class DistanceObserver implements Managed {
     }
 
     private void checkDistance() {
-        LOGGER.info("measuring distance");
+        LOGGER.debug("measuring distance");
     }
 
     @Override

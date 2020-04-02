@@ -2,6 +2,7 @@ package com.github.martinfrank.garage.restserver.resources;
 
 import com.codahale.metrics.annotation.Metered;
 import com.codahale.metrics.annotation.Timed;
+import com.github.martinfrank.garage.restserver.GarageModel;
 import com.github.martinfrank.garage.restserver.api.Saying;
 import com.github.martinfrank.garage.restserver.core.Template;
 import io.dropwizard.jersey.caching.CacheControl;
@@ -23,7 +24,7 @@ public class HelloWorldResource {
     private final Template template;
     private final AtomicLong counter;
 
-    public HelloWorldResource(Template template) {
+    public HelloWorldResource(Template template, GarageModel model) {
         this.template = template;
         this.counter = new AtomicLong();
     }

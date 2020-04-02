@@ -6,7 +6,7 @@
 
     <groupId>com.github.martinfrank</groupId>
     <artifactId>garage-restserver</artifactId>
-    <version>0.1.1</version>
+    <version>0.0.1</version>
 
     <name>garage-restserver</name>
     <description>this project provides a command line interface</description>
@@ -146,48 +146,7 @@
                     <artifactId>sonar-maven-plugin</artifactId>
                     <version>3.2</version>
                 </plugin>
-                <!--                <plugin>-->
-                <!--                    <groupId>org.sonarsource.scanner.maven</groupId>-->
-                <!--                    <artifactId>sonar-maven-plugin</artifactId>-->
-                <!--                    <version>3.5.0.1254</version>-->
-                <!--                    <executions>-->
-                <!--                        <execution>-->
-                <!--                            <phase>verify</phase>-->
-                <!--                            <goals>-->
-                <!--                                <goal>sonar</goal>-->
-                <!--                            </goals>-->
-                <!--                        </execution>-->
-                <!--                    </executions>-->
-                <!--                </plugin>-->
-                <!--                <plugin>-->
-                <!--                    <groupId>org.jacoco</groupId>-->
-                <!--                    <artifactId>jacoco-maven-plugin</artifactId>-->
-                <!--                    <version>0.8.2</version>-->
-                <!--                    <configuration>-->
-                <!--                        <append>true</append>-->
-                <!--                    </configuration>-->
-                <!--                    <executions>-->
-                <!--                        <execution>-->
-                <!--                            <id>prepare-agent</id>-->
-                <!--                            <goals>-->
-                <!--                                <goal>prepare-agent</goal>-->
-                <!--                            </goals>-->
-                <!--                        </execution>-->
-                <!--                        <execution>-->
-                <!--                            <id>prepare-agent-integration</id>-->
-                <!--                            <goals>-->
-                <!--                                <goal>prepare-agent-integration</goal>-->
-                <!--                            </goals>-->
-                <!--                        </execution>-->
-                <!--                        <execution>-->
-                <!--                            <id>jacoco-site</id>-->
-                <!--                            <phase>verify</phase>-->
-                <!--                            <goals>-->
-                <!--                                <goal>report</goal>-->
-                <!--                            </goals>-->
-                <!--                        </execution>-->
-                <!--                    </executions>-->
-                <!--                </plugin>-->
+
                 <plugin>
                     <artifactId>maven-clean-plugin</artifactId>
                     <version>3.1.0</version>
@@ -225,42 +184,6 @@
         </pluginManagement>
 
         <plugins>
-            <!--            <plugin>-->
-            <!--                <groupId>org.jacoco</groupId>-->
-            <!--                <artifactId>jacoco-maven-plugin</artifactId>-->
-            <!--                <executions>-->
-            <!--                    <execution>-->
-            <!--                        <id>prepare-agent</id>-->
-            <!--                        <goals>-->
-            <!--                            <goal>prepare-agent</goal>-->
-            <!--                        </goals>-->
-            <!--                    </execution>-->
-            <!--                    <execution>-->
-            <!--                        <id>prepare-agent-integration</id>-->
-            <!--                        <goals>-->
-            <!--                            <goal>prepare-agent-integration</goal>-->
-            <!--                        </goals>-->
-            <!--                    </execution>-->
-            <!--                    <execution>-->
-            <!--                        <id>jacoco-site</id>-->
-            <!--                        <phase>verify</phase>-->
-            <!--                        <goals>-->
-            <!--                            <goal>report</goal>-->
-            <!--                        </goals>-->
-            <!--                    </execution>-->
-            <!--                    <execution>-->
-            <!--                        <id>report</id>-->
-            <!--                        <phase>test</phase>-->
-            <!--                        <goals>-->
-            <!--                            <goal>report</goal>-->
-            <!--                        </goals>-->
-            <!--                    </execution>-->
-            <!--                </executions>-->
-            <!--            </plugin>-->
-            <!--            <plugin>-->
-            <!--                <groupId>org.sonarsource.scanner.maven</groupId>-->
-            <!--                <artifactId>sonar-maven-plugin</artifactId>-->
-            <!--            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -281,50 +204,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <!--            <plugin>-->
-            <!--                <groupId>org.apache.maven.plugins</groupId>-->
-            <!--                <artifactId>maven-javadoc-plugin</artifactId>-->
-            <!--                <version>3.0.1</version>-->
-            <!--                <executions>-->
-            <!--                    <execution>-->
-            <!--                        <id>attach-javadocs</id>-->
-            <!--                        <goals>-->
-            <!--                            <goal>jar</goal>-->
-            <!--                        </goals>-->
-            <!--                    </execution>-->
-            <!--                </executions>-->
-            <!--            </plugin>-->
-
-
-            <!-- Maven Assembly Plugin -->
-            <!--            <plugin>-->
-            <!--                <groupId>org.apache.maven.plugins</groupId>-->
-            <!--                <artifactId>maven-assembly-plugin</artifactId>-->
-            <!--                <version>2.4.1</version>-->
-            <!--                <configuration>-->
-            <!--                    &lt;!&ndash; get all project dependencies &ndash;&gt;-->
-            <!--                    <descriptorRefs>-->
-            <!--                        <descriptorRef>jar-with-dependencies</descriptorRef>-->
-            <!--                    </descriptorRefs>-->
-            <!--                    &lt;!&ndash; MainClass in mainfest make a executable jar &ndash;&gt;-->
-            <!--                    <archive>-->
-            <!--                        <manifest>-->
-            <!--                            <mainClass>com.github.martinfrank.garage.restserver.GarageRestServer</mainClass>-->
-            <!--                        </manifest>-->
-            <!--                    </archive>-->
-
-            <!--                </configuration>-->
-            <!--                <executions>-->
-            <!--                    <execution>-->
-            <!--                        <id>make-assembly</id>-->
-            <!--                        &lt;!&ndash; bind to the packaging phase &ndash;&gt;-->
-            <!--                        <phase>package</phase>-->
-            <!--                        <goals>-->
-            <!--                            <goal>single</goal>-->
-            <!--                        </goals>-->
-            <!--                    </execution>-->
-            <!--                </executions>-->
-            <!--            </plugin>-->
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

@@ -3,6 +3,8 @@ package com.github.martinfrank.garage.restserver;
 import com.github.martinfrank.garage.restserver.cli.RenderCommand;
 import com.github.martinfrank.garage.restserver.core.Template;
 import com.github.martinfrank.garage.restserver.managed.DistanceObserver;
+import com.github.martinfrank.garage.restserver.resources.GarageGateResource;
+import com.github.martinfrank.garage.restserver.resources.GarageLightResource;
 import com.github.martinfrank.garage.restserver.resources.HelloWorldResource;
 import io.dropwizard.Application;
 import io.dropwizard.assets.AssetsBundle;
@@ -17,6 +19,8 @@ import javax.servlet.FilterRegistration;
 import java.util.EnumSet;
 
 public class GarageRestServer extends Application<GarageRestServerConfiguration> {
+
+
     public static void main(String[] args) throws Exception {
         new GarageRestServer().run(args);
     }
@@ -44,10 +48,12 @@ public class GarageRestServer extends Application<GarageRestServerConfiguration>
 
     @Override
     public void run(GarageRestServerConfiguration configuration, Environment environment) {
+        final GarageModel model = new GarageModel();//shared model
         final Template template = configuration.buildTemplate();
-        environment.jersey().register(new HelloWorldResource(template));
-
-        environment.lifecycle().manage(new DistanceObserver(configuration));
+        environment.jersey().register(new HelloWorldResource(template, model));
+        environment.jersey().register(new GarageGateResource(model));
+        environment.jersey().register(new GarageLightResource(model));
+        environment.lifecycle().manage(new DistanceObserver(configuration, model));
 
 
         final FilterRegistration.Dynamic cors =

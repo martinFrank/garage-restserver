@@ -25,6 +25,7 @@ public class DistanceMeasure {
                 "EchoPin");      // PIN STARTUP STATE (optional)
         timer = new Timer(true);
         this.echoPin.addListener(new GpioPinListenerDigital() {
+
             @Override
             public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) {
                 System.out.println("state:" + event.getEdge() + " int:" + event.getEdge().getValue());

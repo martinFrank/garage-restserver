@@ -1,7 +1,11 @@
+com/github/martinfrank/garage/restserver/api/GarageGate.class
 com/github/martinfrank/garage/restserver/ToggleAction.class
+com/github/martinfrank/garage/restserver/resources/GarageGateResource.class
 com/github/martinfrank/garage/restserver/Bin.class
 com/github/martinfrank/garage/restserver/DistanceMeasure.class
+com/github/martinfrank/garage/restserver/DistanceResults.class
 com/github/martinfrank/garage/restserver/DistanceMeasure$1.class
+com/github/martinfrank/garage/restserver/GarageModel.class
 com/github/martinfrank/garage/restserver/PulseAction.class
 com/github/martinfrank/garage/restserver/resources/HelloWorldResource.class
 com/github/martinfrank/garage/restserver/core/User.class
@@ -11,10 +15,12 @@ com/github/martinfrank/garage/restserver/DistanceMeasure$2.class
 com/github/martinfrank/garage/restserver/managed/DistanceObserver.class
 com/github/martinfrank/garage/restserver/GarageRestServer.class
 com/github/martinfrank/garage/restserver/WebServerRequestHandler.class
+com/github/martinfrank/garage/restserver/resources/GarageLightResource.class
 com/github/martinfrank/garage/restserver/api/Saying.class
 com/github/martinfrank/garage/restserver/GpioAction.class
 com/github/martinfrank/garage/restserver/GarageRestServerConfiguration.class
 com/github/martinfrank/garage/restserver/HtmlSubmitButton.class
+com/github/martinfrank/garage/restserver/api/GarageLight.class
 com/github/martinfrank/garage/restserver/managed/DistanceObserver$1.class
 com/github/martinfrank/garage/restserver/core/Template.class
 com/github/martinfrank/garage/restserver/cli/RenderCommand.class
