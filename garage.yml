@@ -80,3 +80,14 @@ metrics:
 pinConfig:
   burstPin: GPIO 27
   echoPin: GPIO 28
+  gatePin: GPIO 5
+
+timeConfig:
+  distanceMeasureDelay: 5s
+  distanceMeasurePoll: 3s
+  alertDelay: 5s
+  alertPoll: 10s
+  alertAfterOpen: 180s
+
+firebase:
+  token:

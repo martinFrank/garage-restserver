@@ -5,6 +5,7 @@ import com.github.martinfrank.garage.restserver.core.Template;
 import com.github.martinfrank.garage.restserver.resources.GarageGateResource;
 import com.github.martinfrank.garage.restserver.resources.GarageLightResource;
 import com.github.martinfrank.garage.restserver.resources.HelloWorldResource;
+import com.github.martinfrank.garage.restserver.resources.NotificationResource;
 import com.github.martinfrank.garage.restserver.services.DistanceMeasureService;
 import com.github.martinfrank.garage.restserver.services.OpenGateAlertService;
 import io.dropwizard.Application;
@@ -29,7 +30,7 @@ public class GarageRestServer extends Application<GarageRestServerConfiguration>
 
     @Override
     public String getName() {
-        return "hello-world";
+        return "Garage-Server";
     }
 
     @Override
@@ -54,8 +55,9 @@ public class GarageRestServer extends Application<GarageRestServerConfiguration>
         environment.jersey().register(new HelloWorldResource(template, model));
         environment.jersey().register(new GarageGateResource(model));
         environment.jersey().register(new GarageLightResource(model));
-        environment.lifecycle().manage(new DistanceMeasureService(model));
-        environment.lifecycle().manage(new OpenGateAlertService(model));
+        environment.jersey().register(new NotificationResource());
+        environment.lifecycle().manage(new DistanceMeasureService(model, configuration));
+        environment.lifecycle().manage(new OpenGateAlertService(model, configuration));
 
 
         final FilterRegistration.Dynamic cors =

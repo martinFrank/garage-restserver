@@ -1,10 +1,10 @@
 package com.github.martinfrank.garage.restserver.services;
 
 import com.github.martinfrank.garage.restserver.GarageModel;
+import com.github.martinfrank.garage.restserver.GarageRestServerConfiguration;
+import com.github.martinfrank.garage.restserver.model.DistanceResults;
 import com.pi4j.io.gpio.GpioPinDigitalInput;
 import com.pi4j.io.gpio.GpioPinDigitalOutput;
-import com.pi4j.io.gpio.PinState;
-import com.pi4j.io.gpio.RaspiPin;
 import io.dropwizard.lifecycle.Managed;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,27 +16,21 @@ public class DistanceMeasureService implements Managed {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DistanceMeasureService.class);
     private final Timer timer = new Timer();
-    //FIXME values from configuration!!!
-    private static final int POLL_TIME_IN_MILLIS = 10000;
-    private static final int DELAY_IN_MILLIS = 5000;
 
-    private final GarageModel model;
+    private final long poll_in_millis;
+    private final long delay_in_millis;
 
     private final GpioPinDigitalOutput burstPin;
     private final GpioPinDigitalInput echoPin;
+    private final DistanceResults distanceResults;
 
-    public DistanceMeasureService(GarageModel model) {
-        this.model = model;
-        burstPin = model.getGpio().provisionDigitalOutputPin(
-                RaspiPin.getPinByName(model.getConfiguration().pinConfig.burstPin),
-                "BurstPin",
-                PinState.LOW);
-        echoPin = model.getGpio().provisionDigitalInputPin(
-                RaspiPin.getPinByName(model.getConfiguration().pinConfig.echoPin),
-                "EchoPin");
-        LOGGER.info("distance measure observer startet with");
-        LOGGER.info("burstpin {}", burstPin);
-        LOGGER.info("echopin {}", echoPin);
+    public DistanceMeasureService(GarageModel model, GarageRestServerConfiguration configuration) {
+        burstPin = model.getDigitalOutputPin(configuration.pinConfig.burstPin);
+        echoPin = model.getDigitalInputPin(configuration.pinConfig.echoPin);
+        distanceResults = model.getDistanceResults();
+        LOGGER.info("distance measure observer started with burstPin {} and echoPin {}", burstPin, echoPin);
+        poll_in_millis = configuration.timeConfig.distanceMeasurePoll.toMilliseconds();
+        delay_in_millis = configuration.timeConfig.distanceMeasureDelay.toMilliseconds();
     }
 
     @Override
@@ -45,17 +39,12 @@ public class DistanceMeasureService implements Managed {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                checkDistance();
-                alertIfRequired();
+                measureDistance();
             }
-        }, DELAY_IN_MILLIS, POLL_TIME_IN_MILLIS);
+        }, delay_in_millis, poll_in_millis);
     }
 
-    private void alertIfRequired() {
-
-    }
-
-    private void checkDistance() {
+    private void measureDistance() {
         LOGGER.debug("measuring distance now");
 
         try {
@@ -63,20 +52,30 @@ public class DistanceMeasureService implements Managed {
             Thread.sleep((long) 0.01);// Delay for 10 microseconds
             burstPin.low(); //Make trigger pin LOW
 
-            while (echoPin.isLow()) { //Wait until the ECHO pin gets HIGH
-
+            while (echoPin.isLow()) {
+                //Wait until the ECHO pin gets HIGH
             }
             long startTime = System.nanoTime(); // Store the surrent time to calculate ECHO pin HIGH time.
-            while (echoPin.isHigh()) { //Wait until the ECHO pin gets LOW
-
+            while (echoPin.isHigh()) {
+                //Wait until the ECHO pin gets LOW
             }
             long endTime = System.nanoTime(); // Store the echo pin HIGH end time to calculate ECHO pin HIGH time.
             long echoRunTime = endTime - startTime;
-            long shortened = echoRunTime / 100000;
-            model.getDistanceResults().add(System.currentTimeMillis(), echoRunTime);
-            LOGGER.info("result measuring distance: echoRunTime (shortened) {}", shortened);
+
+            //FIXME MagicNumber
+            if (echoRunTime > 7000000) {
+                //cut down to 'normal' value
+                echoRunTime = 6700000;
+            }
+
+            if (echoRunTime < 1200000) {
+                //cut 'up' to 'normal' value
+                echoRunTime = 1350000;
+            }
+            distanceResults.add(System.currentTimeMillis(), echoRunTime);
+
         } catch (Exception e) {
-            System.out.println("Exception:" + e);
+            LOGGER.error("Error during measuring distance", e);
             e.printStackTrace();
         }
         LOGGER.debug("measuring distance done");

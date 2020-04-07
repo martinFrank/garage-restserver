@@ -30,6 +30,7 @@ public class NotificationRequestUtil {
     private static final String BODY_KEY = "body";
     private static final String NOTIFICATION_KEY = "notification";
     private static final String TOKEN_KEY = "token";
+    private static final String TOKEN2 = "enZSNR98RKG8cfsiseunne:APA91bGGbLN8BcwYgka9UeQj_YMu-Tpy1p9yb1JqFtvnTC0mrsMbqCdNm81ZQ_lUqw8Zr8WcGFvbTFc24CjYvp_5upJ55B2zmzRKDZyo8z1OO3MjkAe-3docAKueSJhg66e43scKYMGl";
     private static final String TOKEN = "dZ1gWKF9eu0:APA91bHsTaJm_b28iG1WjTU_c6QsRCrXE7t7MWbkvQhgsr3anz80oAAzon9yu0yGkerAfGHKiZL84iI6CHOBl62F7vOOB9YtZujtZ9T7ii1EdHWmCYcAWmiGxmXJpODE7FiJeCsF9cYz";
     private static final String MESSAGE_KEY = "message";
 
@@ -38,20 +39,24 @@ public class NotificationRequestUtil {
     }
 
     public static void requestSendingPushNotification(String title, String message) throws IOException {
-        JsonObject notificationMessage = buildNotificationMessage(title, message);
+        buildNotificationMessage(title, message, TOKEN2);
+    }
+
+    public static void requestSendingPushNotification(String title, String message, String token) throws IOException {
+        JsonObject notificationMessage = buildNotificationMessage(title, message, token);
         System.out.println("FCM request body for message using common notification object:");
         prettyPrint(notificationMessage);
         sendMessage(notificationMessage);
     }
 
-    private static JsonObject buildNotificationMessage(String title, String message) {
+    private static JsonObject buildNotificationMessage(String title, String message, String token) {
         JsonObject jNotification = new JsonObject();
         jNotification.addProperty(TITLE_KEY, title);
         jNotification.addProperty(BODY_KEY, message);
 
         JsonObject jMessage = new JsonObject();
         jMessage.add(NOTIFICATION_KEY, jNotification);
-        jMessage.addProperty(TOKEN_KEY, TOKEN);
+        jMessage.addProperty(TOKEN_KEY, token);
 
         JsonObject jFcm = new JsonObject();
         jFcm.add(MESSAGE_KEY, jMessage);

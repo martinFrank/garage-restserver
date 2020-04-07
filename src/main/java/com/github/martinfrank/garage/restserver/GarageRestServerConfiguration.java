@@ -3,11 +3,14 @@ package com.github.martinfrank.garage.restserver;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.martinfrank.garage.restserver.core.Template;
 import io.dropwizard.Configuration;
+import io.dropwizard.util.Duration;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Collections;
 import java.util.Map;
+
+//import java.time.Duration;
 
 public class GarageRestServerConfiguration extends Configuration {
     @NotEmpty
@@ -18,6 +21,12 @@ public class GarageRestServerConfiguration extends Configuration {
 
     @JsonProperty("pinConfig")
     public PinConfig pinConfig;
+
+    @JsonProperty("timeConfig")
+    public TimeConfig timeConfig;
+
+    @JsonProperty("firebase")
+    public Firebase firebase;
 
     @NotNull
     private Map<String, Map<String, String>> viewRendererConfiguration = Collections.emptyMap();
@@ -63,5 +72,32 @@ public class GarageRestServerConfiguration extends Configuration {
 
         @JsonProperty("echoPin")
         public String echoPin;
+
+        @JsonProperty("gatePin")
+        public String gatePin;
+    }
+
+    public static final class TimeConfig {
+
+        @JsonProperty("distanceMeasureDelay")
+        public Duration distanceMeasureDelay;
+
+        @JsonProperty("distanceMeasurePoll")
+        public Duration distanceMeasurePoll;
+
+        @JsonProperty("alertDelay")
+        public Duration alertDelay;
+
+        @JsonProperty("alertPoll")
+        public Duration alertPoll;
+
+        @JsonProperty("alertAfterOpen")
+        public Duration alertAfterOpen;
+    }
+
+    public static final class Firebase {
+
+        @JsonProperty("token")
+        public String token;
     }
 }

@@ -1,6 +1,7 @@
 package com.github.martinfrank.garage.restserver.api;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.martinfrank.garage.restserver.model.GarageGateModel;
 
 public class GarageGate {
 
@@ -12,10 +13,10 @@ public class GarageGate {
         // Jackson deserialization
     }
 
-    public GarageGate(String state, String lastRequest, boolean isMoving) {
-        this.state = state;
-        this.lastRequest = lastRequest;
-        this.isMoving = isMoving;
+    public GarageGate(GarageGateModel garageGate) {
+        this.state = garageGate.getGateStatus();
+        this.lastRequest = garageGate.getGateLastUpdate();
+        this.isMoving = garageGate.isGateMoving();
     }
 
     @JsonProperty(value = "isMoving")

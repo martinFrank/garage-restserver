@@ -25,19 +25,16 @@ public class GarageGateResource {
     @GET
     public GarageGate getGate() {
         LOGGER.info("getGate");
-        return new GarageGate("unknown", "16.12.1977", false);
+        model.getDistanceResults().debugValues();
+        return new GarageGate(model.getGarageGate());
     }
 
     @POST
     public GarageGate openCloseGate() {
-        try {
-            model.openCloseGate();
-            return new GarageGate(model.getGateStatus(), model.getGateLastUpdate(), model.isGateMoving());
-        } catch (Exception e) {
-
-        }
         LOGGER.info("openCloseGate");
-        return new GarageGate("unknown", "16.12.1977", true);
+        model.openCloseGate();
+
+        return new GarageGate(model.getGarageGate());
     }
 
 }
