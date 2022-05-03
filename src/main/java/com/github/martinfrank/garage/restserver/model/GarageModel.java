@@ -31,7 +31,7 @@ public class GarageModel {
     }
 
     public void openCloseGate() {
-        if(isRunning){
+        if(!isRunning){
             new Thread(() -> {
                 isRunning = true;
                 gateToggle.high();
