@@ -3,3 +3,4 @@ WLAN Config Tool
 ---
 https://raspberrypi.stackexchange.com/questions/11631/how-to-setup-multiple-wifi-networks
 sudo wicd-curses
+

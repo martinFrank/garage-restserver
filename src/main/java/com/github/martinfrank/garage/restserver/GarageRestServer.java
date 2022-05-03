@@ -1,13 +1,7 @@
 package com.github.martinfrank.garage.restserver;
 
-import com.github.martinfrank.garage.restserver.cli.RenderCommand;
-import com.github.martinfrank.garage.restserver.core.Template;
+import com.github.martinfrank.garage.restserver.model.GarageModel;
 import com.github.martinfrank.garage.restserver.resources.GarageGateResource;
-import com.github.martinfrank.garage.restserver.resources.GarageLightResource;
-import com.github.martinfrank.garage.restserver.resources.HelloWorldResource;
-import com.github.martinfrank.garage.restserver.resources.NotificationResource;
-import com.github.martinfrank.garage.restserver.services.DistanceMeasureService;
-import com.github.martinfrank.garage.restserver.services.OpenGateAlertService;
 import io.dropwizard.Application;
 import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
@@ -43,7 +37,6 @@ public class GarageRestServer extends Application<GarageRestServerConfiguration>
                 )
         );
 
-        bootstrap.addCommand(new RenderCommand());
         bootstrap.addBundle(new AssetsBundle());
 
     }
@@ -51,14 +44,7 @@ public class GarageRestServer extends Application<GarageRestServerConfiguration>
     @Override
     public void run(GarageRestServerConfiguration configuration, Environment environment) {
         final GarageModel model = new GarageModel(configuration);//shared model
-        final Template template = configuration.buildTemplate();
-        environment.jersey().register(new HelloWorldResource(template, model));
         environment.jersey().register(new GarageGateResource(model));
-        environment.jersey().register(new GarageLightResource(model));
-        environment.jersey().register(new NotificationResource());
-        environment.lifecycle().manage(new DistanceMeasureService(model, configuration));
-        environment.lifecycle().manage(new OpenGateAlertService(model, configuration));
-
 
         final FilterRegistration.Dynamic cors =
                 environment.servlets().addFilter("CORS", CrossOriginFilter.class);
